@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# generic Vagrantfile for local development
+# required plugins:
+#   vagrant-cachier
+
+
+
+Vagrant.configure(2) do |config|
+    # In Ubuntu 14 we trust
+    default_box = "ubuntu/trusty64"
+
+    # Nice to have plugin: vagrant-cachier
+    # https://github.com/fgrehm/vagrant-cachier
+    if Vagrant.has_plugin?("vagrant-cachier")
+        config.cache.scope = :box
+    end
+    config.vm.define :dev do |node|
+        node.vm.box = default_box
+        node.vm.hostname = "dev.local"
+        node.vm.network :private_network, :ip => "192.168.13.37"
+
+
+
+        node.vm.post_up_message = "Just connect to specified ip: curl ip:port/ololo"
+
+
+        node.vm.provider :virtualbox do |vb|
+            vb.memory = 512
+            vb.cpus = 1
+        end
+        # todo: split into priviledged provision and not.
+#         config.vm.provision "shell", path: "vagrant/unicorn.sh"
+
+    end
+#     config.vm.provision "shell", path: "vagrant/locale.sh", privileged: false
+#     config.vm.provision "shell", path: "vagrant/provisioner.sh"
+
+end
+
