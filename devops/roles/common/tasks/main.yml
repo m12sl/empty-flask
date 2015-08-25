@@ -1,0 +1,16 @@
+---
+ - name: update
+   apt: update_cache=yes cache_valid_time=3600
+
+ - name: setup locale
+   command: locale-gen ru_RU.UTF-8
+
+ - name: install common packages
+   apt: pkg={{ item }} state=latest
+   with_items:
+    - python-dev
+    - python-setuptools
+    - python-pip
+
+ - name: install python virtualenv
+   pip: name=virtualenv

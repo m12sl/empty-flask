@@ -1,0 +1,2 @@
+[local]
+dev.local ansible_ssh_host=127.0.0.1 ansible_ssh_port=9980 ansible_ssh_user=vagrant ansible_ssh_private_key_file=../local-vm/.vagrant/machines/dev/virtualbox/private_key
