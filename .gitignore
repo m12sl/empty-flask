@@ -1,4 +1,5 @@
-devops/ssh.config
+local-vm/.vagrant
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
