@@ -1,9 +1,14 @@
 ---
-- name: Update, setup locale, install nginx, setup python-tools, ...
-  hosts: local
-  remote_user: vagrant
-  sudo: yes
+- name: Create user
+  hosts: do
+  user: root
+  roles:
+   - access
 
+- name: Update, setup locale, install nginx, setup python-tools, ...
+  hosts: do
+  remote_user: pony
+  sudo: yes
   roles:
     - common
     - nginx

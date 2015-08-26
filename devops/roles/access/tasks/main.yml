@@ -1,0 +1,11 @@
+---
+ - name: Add user
+   user: name=pony
+         shell=/bin/bash
+         state=present
+         group=sudo
+
+ - name: Specify ssh key
+   authorized_key: user=pony
+                   key="{{ lookup('file', '~/.ssh/redheart_rsa.pub') }}"
+                   state=present

@@ -14,10 +14,10 @@
  - name: uwsgi site config
    template: src=uwsgi.ini dest=/var/www/{{ site_name }}/uwsgi.ini
 
- - name: restart supervisor and nginx
+
+ - name: restart nginx
    service: name={{ item }} state=restarted
    with_items:
-    - supervisor
     - nginx
 
 

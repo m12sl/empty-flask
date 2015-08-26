@@ -48,11 +48,11 @@ ansible-playbook -i inventory local.yml
 
 Похоже, что работает.
 
-1. Надо убрать жесткий хардкод
+1. Убрать жесткий хардкод из ролей
 
 2. Сделать перезагрузку сервисов через `handlers` или `notification`
 
-3. Протестить на Digital Ocean
+3. Протестить на Digital Ocean. не работает `service: name=supervisor state=restarted`
 
 4. Добавить provision в Vagrantfile?
 
