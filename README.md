@@ -31,6 +31,13 @@ cd devops
 ansible local -i inventory -m ping -vvvv
 ```
 
+Все разворачивается так:
+
+```
+cd devops
+ansible-playbook -i inventory local.yml
+```
+
 
 ### Пишем playbooks & roles
 
