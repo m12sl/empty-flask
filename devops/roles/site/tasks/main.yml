@@ -5,8 +5,28 @@
  - name: create virtualenv -- flaskbox
    pip: requirements=/var/www/{{ site_name }}/requirements.txt virtualenv=/var/www/{{ site_name }}/flaskbox
 
+ - name: install uwsgi
+   pip: name=uwsgi virtualenv=/var/www/{{ site_name }}/flaskbox
+
+ - name: setup uwsgi under supervisor
+   template: src=uwsgi.conf dest=/etc/supervisor/conf.d/uwsgi.conf
+
+ - name: uwsgi site config
+   template: src=uwsgi.ini dest=/var/www/{{ site_name }}/uwsgi.ini
+
+ - name: restart supervisor and nginx
+   service: name={{ item }} state=restarted
+   with_items:
+    - supervisor
+    - nginx
+
+
+
  - name: reset permissions
    file: dest=/var/www state=directory recurse=yes owner=www-data group=www-data mode=0755
+
+ - name: reset permissions for log dir
+   file: dest=/var/log/uwsgi/%n.log state=directory recurse=yes owner=www-data group=www-data mode=0755
 
 #- name: Copy nginx default.conf
 #  template: src=default.conf dest=/etc/nginx/conf.d/default.conf
